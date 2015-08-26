@@ -18,39 +18,42 @@
     <body>
         <div id="wrapper">
             <p>please select preferable weather and countries</p>
-            <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-primary active">
-                <input type="radio" name="options" id="option1" autocomplete="off" checked> Radio 1 (preselected)
-                </label>
-                <label class="btn btn-primary">
-                <input type="radio" name="options" id="option2" autocomplete="off"> Radio 2
-                </label>
-                <label class="btn btn-primary">
-                <input type="radio" name="options" id="option3" autocomplete="off"> Radio 3
-                </label>
-            </div>
-        <div class="choose_weather">
-            <ul>
-                <li>Sunny/0-15 &#8451</li>
-                <li>Sunny/15-25 &#8451</li>
-                <li>Sunny/25-35 &#8451</li>
-                <li>Sunny/Any temperature &#8451</li>
-                <li></li>
-            </ul>
+            <form action="" method="get">
+                <div class="btn-group choose_weather" data-toggle="buttons">
+                    <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Sunny/0-15 &#8451
+                    </label>
+                    <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option2" autocomplete="off">Sunny/15-25 &#8451
+                    </label>
+                    <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option3" autocomplete="off">Sunny/25-35 &#8451
+                    </label>
+                    <label class="btn btn-primary active">
+                    <input type="radio" name="options" id="option2" autocomplete="off">Sunny/Any temperature
+                    </label>
+                </div>
+                <div class="btn-group choose_region" data-toggle="buttons">
+                    <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Europe
+                    </label>
+                    <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option2" autocomplete="off">Asien
+                    </label>
+                    <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option3" autocomplete="off">Afrika
+                    <label class="btn btn-primary active">
+                    <input type="radio" name="options" id="option2" autocomplete="off">Latina
+                    </label>
+                    <label class="btn btn-primary active">
+                    <input type="radio" name="options" id="option2" autocomplete="off">North America
+                    </label>
+                    <label class="btn btn-primary active">
+                    <input type="radio" name="options" id="option2" autocomplete="off">Any
+                    </label>
+                </div>
+                <input type="button" value="search">
+            </form>
         </div>
-        <div class="choose_region">
-            <ul>
-                <li>Europe</li>
-                <li>Asien</li>
-                <li>Afrika</li>
-                <li>Latina</li>
-                <li>North America</li>
-            </ul>
-        </div>
-        <form action="" method="get">
-            <input type="button" value="search">
-        </form>
-        </div>
-        
     </body>
 </html>
