@@ -7,9 +7,9 @@ $(document).ready(function(){
     }, 400);
     setTimeout(function() {
         $(".choose_weather").removeClass("hidden_with_opacity");
-    }, 4500);
+    }, 600);
     setTimeout(function() {
         $("button").removeClass("hidden_with_opacity");
-    }, 600);
+    }, 800);
 
 });
