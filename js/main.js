@@ -1,4 +1,4 @@
 $(document).ready(function(){
-    $("hidden_with_opacity").removeClass("hidden_with_opacity")
+    $("p div").removeClass("hidden_with_opacity")
     
 });
