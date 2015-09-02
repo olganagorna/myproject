@@ -3,10 +3,10 @@ $(document).ready(function(){
         $("p").removeClass("hidden_with_opacity");
     }, 150);
     setTimeout(function() {
-        $("choose_region").removeClass("hidden_with_opacity");
+        $(".choose_region").removeClass("hidden_with_opacity");
     }, 300);
     setTimeout(function() {
-        $("choose_weather").removeClass("hidden_with_opacity");
+        $(".choose_weather").removeClass("hidden_with_opacity");
     }, 450);
     setTimeout(function() {
         $("button").removeClass("hidden_with_opacity");
