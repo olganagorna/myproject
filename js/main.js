@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    $(".select").fadeIn();
-    $(".choose_weather").fadeIn(1500);
-    $(".choose_region").fadeIn(3000);
-    $(".submit_button").fadeIn(450);
+    $(".select").fadeIn("450");
+    $(".choose_weather").fadeIn("150");
+    $(".choose_region").fadeIn("300");
+    $(".submit_button").fadeIn("450");
 });
