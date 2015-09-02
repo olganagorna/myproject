@@ -1,15 +1,15 @@
 $(document).ready(function(){
     setTimeout(function() {
         $("p").removeClass("hidden_with_opacity");
-    }, 1500);
+    }, 150);
     setTimeout(function() {
         $("choose_region").removeClass("hidden_with_opacity");
-    }, 1500);
+    }, 300);
     setTimeout(function() {
         $("choose_weather").removeClass("hidden_with_opacity");
-    }, 1500);
+    }, 450);
     setTimeout(function() {
         $("button").removeClass("hidden_with_opacity");
-    }, 1500);
+    }, 600);
 
 });
