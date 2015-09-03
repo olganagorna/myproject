@@ -40,5 +40,6 @@ $(document).ready(function(){
         $('.btn_table').addClass('fadeOutUpBig');
         $('#table_wrapper').removeClass('slide_out_up').addClass('fadeOutUpBig');
         $('#wrapper_weather_table').removeClass('hidden_down').addClass('slide_out_up_big');
+        
     });
 });
