@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SunnyVacation</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="styles/animate.css"/>
+        <link rel="stylesheet/less" type="text/less" href="styles/styles.less"/>
+        <link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="styles/less.js" type="text/javascript"></script>
+        <!--[if lt IE 9]-->
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <!--[endif]-->
+        <script src="js/main.js" type="text/javascript"></script>
+       
+    </head>
+    <body>
+        <div id="wrapper">
+            <form id="search_form" action="" method="get" class="hidden_with_opacity animated">
+                <div class="welcome_text animated ">Select preferable weather and countries</div>
+                <div class="btn-group animated choose_weather " data-toggle="buttons">
+                    <label class="btn btn-primary active" data-value="1">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked>0-15 °C
+                    </label>
+                    <label class="btn btn-primary" data-value="2">
+                        <input type="radio" name="options" id="option2" autocomplete="off">15-25 °C
+                    </label>
+                    <label class="btn btn-primary" data-value="3">
+                        <input type="radio" name="options" id="option3" autocomplete="off">25-35 °C
+                    </label>
+                    <label class="btn btn-primary" data-value="4">
+                        <input type="radio" name="options" id="option4" autocomplete="off">Any temperature, sunny
+                    </label>
+                </div><br>
+                <div class="btn-group animated choose_region " data-toggle="buttons">
+                    <label class="btn btn-primary active" data-value="eu">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked>Europe
+                    </label>
+                    <label class="btn btn-primary" data-value="asia">
+                        <input type="radio" name="options" id="option2" autocomplete="off">Asien
+                    </label>
+                    <label class="btn btn-primary" data-value="africa">
+                        <input type="radio" name="options" id="option3" autocomplete="off">Africa
+                    </label>
+                    <label class="btn btn-primary" data-value="south_america"> 
+                        <input type="radio" name="options" id="option4" autocomplete="off">Latina
+                    </label>
+                    <label class="btn btn-primary" data-value="north_america">
+                        <input type="radio" name="options" id="option3" autocomplete="off">North America
+                    </label>
+                    <label class="btn btn-primary" data-value="any">
+                        <input type="radio" name="options" id="option4" autocomplete="off">Any
+                    </label>
+                </div>
+                <div>
+                <button type="submit" id="search_button" class="btn btn-lg animated ">Search</button>
+                <div class='uil-ripple-css' style='-webkit-transform:scale(0.23)'><div></div><div></div></div>
+                </div>
+            </form>
+
+            <div id="table_wrapper" class="hidden_down animated">
+                <h2>Sunny next 5 days</h2>
+                <table class="table results_table">   
+                    <tbody id='result'></tbody>
+                </table>
+            </div>
+
+            <div id="wrapper_weather_table" class="hidden_down animated">
+            	<p>Місто: <span id="location" ></span></p>
+            	<table id="weather_table" >
+					<tr>
+						<th>Коли</th><th>Небо</th><th>Температура</th><th>Стан</th>
+					</tr>
+		        </table>
+		        <p id="error"></p>
+            </div>
+			
+	        
+        </div>
+    </body>
+</html>
