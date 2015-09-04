@@ -7,10 +7,6 @@ $(document).ready(function(){
     var south_america = ['Rio de Janeiro', 'Buenos Aires', 'La Fortuna'];
     var north_america = ['Las Vegas', 'New York', 'Orlando'];
 
-    var array_for_data_keeping = [];
-    
-
-
     // click handlers
     $('#search_button').click(function(event) {
         event.preventDefault();
@@ -30,7 +26,6 @@ $(document).ready(function(){
             $('.btn_table').removeClass('hidden_down');
             $('#table_wrapper').removeClass('hidden_down').addClass('slide_out_up');
         }, 1500);
-
 
         var weather_type_code = $('.choose_weather .active').data('value');
         var region_code = $('.choose_region .active').data('value');        
@@ -61,47 +56,55 @@ $(document).ready(function(){
         }
 
         cities.forEach(function(city) {
-            getWeatherByCity('eng', do_smth_with_data, showError, city);
+            getWeatherByCity1Day('eng', do_smth_with_data, showError, city);
         });
         
 
-        // switch (parseInt(weather_type_code)) {
-        //     case 1:
-        //       break;
-        //     case 2:
-        //       break;
-        //     case 3:
-        //       break;
-        //     case 4:
-        //       break;
-        // }
-
-
-
-
+       var min_temp, max_temp; 
+       if (weather_type_code == '1') {
+        min_temp = 0;
+        max_temp = 15;
+       }
+       if (weather_type_code == '2') {
+        min_temp = 14;
+        max_temp = 25;
+       }
+       if (weather_type_code == '3') {
+        min_temp = 24;
+        max_temp = 35;
+       }
+       if (weather_type_code == '4') {
+        min_temp = 35;
+       }
+       
+   
     });
 
-    function do_smth_with_data(data, city_name){
+    function do_smth_with_data(data, city_name, min_temp, max_temp){
         $.each(data.list, function(){
             console.log(city_name + ' : ' + this.weather[0].description + ' '
             + Math.round(this.temp.day)); 
+            
+            var array_for_data = [];
+            if ((Math.round(this.temp.day) > min_temp) && (Math.round(this.temp.day) < max_temp)) {
+                array_for_data.push(city_name);
+            } 
+            console.log(array_for_data);
+            // if ((Math.round(this.temp.day) > 14) && (Math.round(this.temp.day) < 25)) {
+            //     array_for_data.push(city_name);
+            //     console.log(array_for_data);
+            // }
+            // if ((Math.round(this.temp.day) > 24) && (Math.round(this.temp.day) < 35)) {
+            //     array_for_data.push(city_name);
+            //     console.log(array_for_data);
+            // }
+            // if ((Math.round(this.temp.day) > 34) {
+            //     array_for_data.push(city_name);
+            //     console.log(array_for_data);
+            // }
         });
     }
-    // function calculate_quantity_of_appropriate_days(data, city_name,
-    // min_temp, maz_temp){
-    //     var quantity_of_appropriate_days = 0;
-    //     $.each(data.list, function(){
-    //         if((data.temp.day < max_temp) && (data.temp.day > min_temp)) {
-    //         quantity_of_appropriate_days++;
-    //         }
-    //         console.log(quantity_of_appropriate_days);
-    //     });
- 
-
-
-
-
-    // - - - - - - - 
+     // - - - - - - - 
 
 
 
@@ -112,16 +115,25 @@ $(document).ready(function(){
     
     
     $('.city_name').click(function () {
-        getWeatherByCity('eng', dataReceived, showError, $(this).text());
+        getWeatherByCity5Days('eng', dataReceived, showError, $(this).text());
     });
 
 
 
     // API interactions
-    function getWeatherByCity(lang, success_function, error_function, city_name) {
+    function getWeatherByCity5Days(lang, success_function, error_function, city_name) {
         $.getJSON(
             'http://api.openweathermap.org/data/2.5/forecast/daily?q=' 
             + city_name + '&cnt=5&units=metric' + '&lang=' + lang,
+            function (data) {
+                success_function.call(this, data, city_name);
+            }
+        );
+    }
+    function getWeatherByCity1Day(lang, success_function, error_function, city_name) {
+        $.getJSON(
+            'http://api.openweathermap.org/data/2.5/forecast/daily?q=' 
+            + city_name + '&cnt=1&units=metric' + '&lang=' + lang,
             function (data) {
                 success_function.call(this, data, city_name);
             }
