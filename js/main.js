@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     // global settings etc.
-    var europe = ['Paris', 'Munich', 'Roma'];
+    var europe = ['Paris', 'Munich', 'Roma', 'Milan', 'Barcelona', 'Vienna', 'Lviv', 'Graz', 'Monaco', 'Lisboa', 'Oslo', 'Prague', 'Warsaw', 'Athens', 'Berlin'];
     var asia = ['Tokyo', 'Bejing', 'Seul'];
     var africa = ['Casablanca', 'Tunis', 'Cape Town'];
     var south_america = ['Rio de Janeiro', 'Buenos Aires', 'La Fortuna'];
@@ -13,19 +13,11 @@ $(document).ready(function(){
         if ($(this).hasClass('loading')) {
             return;
         }
-        $(this).addClass('round');
-        setTimeout(function() {
-            $('#search_button').addClass('loading');
-        }, 500);
-        $('.welcome_text').addClass('fadeOutUp');
-        $('.choose_weather').addClass('fadeOutUp');
-        $('.choose_region').addClass('fadeOutUp');
-        setTimeout(function() {
-            $('#search_button').removeClass('round').removeClass('loading').addClass('slide_out_up');
-            $('.results_table').removeClass('hidden_down');
-            $('.btn_table').removeClass('hidden_down');
-            $('#table_wrapper').removeClass('hidden_down').addClass('slide_out_up');
-        }, 1500);
+        $(this).addClass('round').addClass('loading');;
+        // setTimeout(function() {
+            
+        // }, 500);
+        
 
         var weather_type_code = $('.choose_weather .active').data('value');
         var region_code = $('.choose_region .active').data('value');        
@@ -55,9 +47,7 @@ $(document).ready(function(){
           break;
         }
 
-        cities.forEach(function(city) {
-            getWeatherByCity1Day('eng', do_smth_with_data, showError, city);
-        });
+        
         
 
        var min_temp, max_temp; 
@@ -76,48 +66,38 @@ $(document).ready(function(){
        if (weather_type_code == '4') {
         min_temp = 35;
        }
-       
+
+       cities.forEach(function(city) {
+            getWeatherByCity1Day('eng', do_smth_with_data, showError, city, min_temp, max_temp);
+       });
    
     });
 
     function do_smth_with_data(data, city_name, min_temp, max_temp){
         $.each(data.list, function(){
-            console.log(city_name + ' : ' + this.weather[0].description + ' '
-            + Math.round(this.temp.day)); 
-            
+
             var array_for_data = [];
+
             if ((Math.round(this.temp.day) > min_temp) && (Math.round(this.temp.day) < max_temp)) {
-                array_for_data.push(city_name);
+                $('#result').append('<tr><td class="city"><a class="city_name" href="" name="' + city_name + '">' + city_name + '</td></tr>')
             } 
-            console.log(array_for_data);
-            // if ((Math.round(this.temp.day) > 14) && (Math.round(this.temp.day) < 25)) {
-            //     array_for_data.push(city_name);
-            //     console.log(array_for_data);
-            // }
-            // if ((Math.round(this.temp.day) > 24) && (Math.round(this.temp.day) < 35)) {
-            //     array_for_data.push(city_name);
-            //     console.log(array_for_data);
-            // }
-            // if ((Math.round(this.temp.day) > 34) {
-            //     array_for_data.push(city_name);
-            //     console.log(array_for_data);
-            // }
+
+            //remove loader and show table
+            setTimeout(function() {
+                $('#search_form').addClass('fadeOutUp');
+            }, 1000);
+            setTimeout(function() {
+                $('#table_wrapper').removeClass('hidden_down').addClass('fadeInUp');
+            }, 1500);
+
         });
     }
-     // - - - - - - - 
-
-
-
-    $('.city').click(function(event) {
+     
+    $(document.body).on('click', '.city_name', function(event){
         event.preventDefault();
         show_city_animations();
-    });
-    
-    
-    $('.city_name').click(function () {
         getWeatherByCity5Days('eng', dataReceived, showError, $(this).text());
     });
-
 
 
     // API interactions
@@ -130,12 +110,12 @@ $(document).ready(function(){
             }
         );
     }
-    function getWeatherByCity1Day(lang, success_function, error_function, city_name) {
+    function getWeatherByCity1Day(lang, success_function, error_function, city_name, min_temp, max_temp) {
         $.getJSON(
             'http://api.openweathermap.org/data/2.5/forecast/daily?q=' 
             + city_name + '&cnt=1&units=metric' + '&lang=' + lang,
             function (data) {
-                success_function.call(this, data, city_name);
+                success_function.call(this, data, city_name, min_temp, max_temp);
             }
         );
     }
@@ -178,17 +158,9 @@ $(document).ready(function(){
     // animations
 
     setTimeout(function() {
-        $('.welcome_text').removeClass('hidden_with_opacity');
+        $('#search_form').removeClass('hidden_with_opacity').addClass('pulse');
     }, 200);
-    setTimeout(function() {
-        $('.choose_weather').removeClass('hidden_with_opacity');
-    }, 500);
-    setTimeout(function() {
-        $('.choose_region').removeClass('hidden_with_opacity');
-    }, 800);
-    setTimeout(function() {
-        $('#search_button').removeClass('hidden_with_opacity');
-    }, 1200);
+    
 
 
     function show_city_animations() {
@@ -196,6 +168,6 @@ $(document).ready(function(){
         $('.results_table').addClass('fadeOutUpBig');
         $('.btn_table').addClass('fadeOutUpBig');
         $('#table_wrapper').removeClass('slide_out_up').addClass('fadeOutUpBig');
-        $('#wrapper_weather_table').removeClass('hidden_down').addClass('slide_out_up_big');
+        $('#wrapper_weather_table').removeClass('hidden_down').addClass('fadeInUp');
     }
 });
