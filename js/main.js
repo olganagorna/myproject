@@ -70,12 +70,6 @@ $(document).ready(function(){
        cities.forEach(function(city) {
             getWeatherByCity1Day('eng', do_smth_with_data, showError, city, min_temp, max_temp);
        });
-<<<<<<< HEAD
-=======
-
-        
-       
->>>>>>> master
    
     });
 
@@ -83,11 +77,7 @@ $(document).ready(function(){
         $.each(data.list, function(){
 
             var array_for_data = [];
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> master
             if ((Math.round(this.temp.day) > min_temp) && (Math.round(this.temp.day) < max_temp)) {
                 $('#result').append('<tr><td class="city"><a class="city_name" href="" name="' + city_name + '">' + city_name + '</td></tr>')
             } 
