@@ -141,12 +141,54 @@ $(document).ready(function(){
     function addWeather(icon, day, condition, temp){
         var markup = '<tr>'+
                 '<td>' + day + '</td>' +
-                '<td>' + '<img src="images/icons/'+ 
-                  icon
-                  +'.png" />' + '</td>' +
+                '<td>' + '<i class="wi"></i>' + '</td>' +
                 '<td>' + temp + '</td>' +
                 '<td>' + condition + '</td>'
             + '</tr>';
+            if(condition == 'clear sky') {
+                $('.wi').addClass('wi-day-sunny');
+            }
+            if(condition == 'few clouds') {
+                $('.wi').addClass('wi-day-cloudy');
+            }
+            if(condition == 'scattered clouds') {
+                $('.wi').addClass('wi-cloud');
+            }
+            if((condition == 'broken clouds') || (condition == 'overcast clouds')) {
+                $('.wi').addClass('wi-cloudy');
+            }
+            if((condition == 'shower rain') || (condition == 'light intensity drizzle') ||(condition == 'drizzle')
+            || (condition == 'heavy intensity drizzle') || (condition == 'light intensity drizzle rain') ||
+            (condition == 'drizzle rain') || (condition == 'heavy intensity drizzle rain') || 
+            (condition == 'shower rain and drizzle') || (condition == 'heavy shower rain and drizzle')
+            || (condition == 'shower drizzle') || (condition =='light intensity shower rain') || 
+            (condition =='heavy intensity shower rain') || (condition == 'ragged shower rain')) {
+                $('.wi').addClass('wi-showers');
+            }
+            if((condition == 'rain') || (condition == 'light rain') || (condition == 'moderate rain	') ||
+            (condition == 'heavy intensity rain') || (condition == 'very heavy rain') || (condition == 'extreme rain')) {
+                $('.wi').addClass('wi-rain');
+            }
+            if((condition == 'thunderstorm') || (condition == 'thunderstorm with light rain') || 
+            (condition == 'thunderstorm with rain') || (condition == 'thunderstorm with heavy rain') ||
+            (condition == 'light thunderstorm') || (condition == 'heavy thunderstorm') || 
+            (condition == 'ragged thunderstorm') || (condition == 'thunderstorm with light drizzle') || 
+            (condition == 'thunderstorm with drizzle') || (condition == 'thunderstorm with heavy drizzle')) {
+                $('.wi').addClass('wi-thunderstorm');
+            }
+            if((condition == 'snow') || (condition =='freezing rain') || (condition == 'light snow') ||
+            (condition == 'heavy snow') || (condition =='sleet') || (condition == 'shower sleet') ||
+            (condition == 'light rain and snow') || (condition == 'rain and snow') || (condition == 'light shower snow')
+            || (condition == 'shower snow') || (condition == 'heavy shower snow')) {
+                $('.wi').addClass('wi-snow');
+            }
+            if(condition == 'mist') {
+                $('.wi').addClass('wi-fog');
+            }
+           
+            else {
+                $('.wi').addClass('wi-tornado');
+            }
         weather_table.insertRow(-1).innerHTML = markup; // Додаємо рядок до таблиці
     }
 
