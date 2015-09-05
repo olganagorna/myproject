@@ -64,7 +64,8 @@ $(document).ready(function(){
         max_temp = 35;
        }
        if (weather_type_code == '4') {
-        min_temp = 35;
+        min_temp = 0;
+        max_temp = 50;
        }
 
        cities.forEach(function(city) {
@@ -125,7 +126,6 @@ $(document).ready(function(){
         var country = data.city.country;
 
         $.each(data.list, function(){
-            
             var localTime = new Date(this.dt*1000 - offset); 
             addWeather(
                 this.weather[0].icon,
@@ -135,27 +135,35 @@ $(document).ready(function(){
             );
         });
 
+        
+
         $('#location').html(city_name + ', <b>' + country + '</b>'); // Додаємо локацію на сторінку
     }
 
     function addWeather(icon, day, condition, temp){
+
+        var icon_class = add_icons(condition);
+
         var markup = '<tr>'+
                 '<td>' + day + '</td>' +
-                '<td>' + '<i class="wi"></i>' + '</td>' +
+                '<td>' + '<i class="wi ' + icon_class + '"></i>' + '</td>' +
                 '<td>' + temp + '</td>' +
                 '<td>' + condition + '</td>'
             + '</tr>';
+            
+        
+        function add_icons(condition) {
             if(condition == 'clear sky') {
-                $('.wi').addClass('wi-day-sunny');
+                return 'wi-day-sunny';
             }
             if(condition == 'few clouds') {
-                $('.wi').addClass('wi-day-cloudy');
+                return 'wi-day-cloudy';
             }
             if(condition == 'scattered clouds') {
-                $('.wi').addClass('wi-cloud');
+                return 'wi-cloud';
             }
             if((condition == 'broken clouds') || (condition == 'overcast clouds')) {
-                $('.wi').addClass('wi-cloudy');
+                return 'wi-cloudy';
             }
             if((condition == 'shower rain') || (condition == 'light intensity drizzle') ||(condition == 'drizzle')
             || (condition == 'heavy intensity drizzle') || (condition == 'light intensity drizzle rain') ||
@@ -163,38 +171,40 @@ $(document).ready(function(){
             (condition == 'shower rain and drizzle') || (condition == 'heavy shower rain and drizzle')
             || (condition == 'shower drizzle') || (condition =='light intensity shower rain') || 
             (condition =='heavy intensity shower rain') || (condition == 'ragged shower rain')) {
-                $('.wi').addClass('wi-showers');
+                return 'wi-showers';
             }
-            if((condition == 'rain') || (condition == 'light rain') || (condition == 'moderate rain	') ||
+            if((condition == 'rain') || (condition == 'light rain') || (condition == 'moderate rain') ||
             (condition == 'heavy intensity rain') || (condition == 'very heavy rain') || (condition == 'extreme rain')) {
-                $('.wi').addClass('wi-rain');
+                return 'wi-rain';
             }
             if((condition == 'thunderstorm') || (condition == 'thunderstorm with light rain') || 
             (condition == 'thunderstorm with rain') || (condition == 'thunderstorm with heavy rain') ||
             (condition == 'light thunderstorm') || (condition == 'heavy thunderstorm') || 
             (condition == 'ragged thunderstorm') || (condition == 'thunderstorm with light drizzle') || 
             (condition == 'thunderstorm with drizzle') || (condition == 'thunderstorm with heavy drizzle')) {
-                $('.wi').addClass('wi-thunderstorm');
+                return 'wi-thunderstorm';
             }
             if((condition == 'snow') || (condition =='freezing rain') || (condition == 'light snow') ||
             (condition == 'heavy snow') || (condition =='sleet') || (condition == 'shower sleet') ||
             (condition == 'light rain and snow') || (condition == 'rain and snow') || (condition == 'light shower snow')
             || (condition == 'shower snow') || (condition == 'heavy shower snow')) {
-                $('.wi').addClass('wi-snow');
+                return 'wi-snow';
             }
             if(condition == 'mist') {
-                $('.wi').addClass('wi-fog');
+                return 'wi-fog';
             }
-           
-            else {
-                $('.wi').addClass('wi-tornado');
-            }
+        }
+
         weather_table.insertRow(-1).innerHTML = markup; // Додаємо рядок до таблиці
+        
+
     }
 
     function showError(msg){
         $('#error').html('Сталася помилка: ' + msg);
     }
+
+
 
 
     // animations
@@ -212,4 +222,6 @@ $(document).ready(function(){
         $('#table_wrapper').removeClass('slide_out_up').addClass('fadeOutUpBig');
         $('#wrapper_weather_table').removeClass('hidden_down').addClass('fadeInUp');
     }
+
+    
 });
