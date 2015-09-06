@@ -10,14 +10,11 @@ $(document).ready(function(){
     // click handlers
     $('#search_button').click(function(event) {
         event.preventDefault();
+        $('#result tr').remove();
         if ($(this).hasClass('loading')) {
             return;
         }
         $(this).addClass('round').addClass('loading');;
-        // setTimeout(function() {
-            
-        // }, 500);
-        
 
         var weather_type_code = $('.choose_weather .active').data('value');
         var region_code = $('.choose_region .active').data('value');        
@@ -47,57 +44,47 @@ $(document).ready(function(){
           break;
         }
 
-        
-        
+        var min_temp, max_temp; 
+        if (weather_type_code == '1') {
+            min_temp = 0;
+            max_temp = 15;
+        }
+        if (weather_type_code == '2') {
+            min_temp = 14;
+            max_temp = 25;
+        }
+        if (weather_type_code == '3') {
+            min_temp = 24;
+            max_temp = 35;
+        }
+        if (weather_type_code == '4') {
+            min_temp = 0;
+            max_temp = 50;
+        }
 
-       var min_temp, max_temp; 
-       if (weather_type_code == '1') {
-        min_temp = 0;
-        max_temp = 15;
-       }
-       if (weather_type_code == '2') {
-        min_temp = 14;
-        max_temp = 25;
-       }
-       if (weather_type_code == '3') {
-        min_temp = 24;
-        max_temp = 35;
-       }
-       if (weather_type_code == '4') {
-        min_temp = 0;
-        max_temp = 50;
-       }
-
-       cities.forEach(function(city) {
+        cities.forEach(function(city) {
             getWeatherByCity1Day('eng', do_smth_with_data, showError, city, min_temp, max_temp);
-       });
-   
+        });
     });
 
     function do_smth_with_data(data, city_name, min_temp, max_temp){
         $.each(data.list, function(){
-
-            var array_for_data = [];
-
             if ((Math.round(this.temp.day) > min_temp) && (Math.round(this.temp.day) < max_temp)) {
                 $('#result').append('<tr><td class="city"><a class="city_name" href="" name="' + city_name + '">' + city_name + '</td></tr>')
-            } 
+            }
 
             //remove loader and show table
-            setTimeout(function() {
-                $('#search_form').addClass('fadeOutUp');
-            }, 1000);
-            setTimeout(function() {
-                $('#table_wrapper').removeClass('hidden_down').addClass('fadeInUp');
-            }, 1500);
-
+            animate_search_form();
+            
         });
     }
+   
      
     $(document.body).on('click', '.city_name', function(event){
         event.preventDefault();
         show_city_animations();
         getWeatherByCity5Days('eng', dataReceived, showError, $(this).text());
+        $('#wrapper_weather_table').removeClass('fadeOutDown');
     });
 
 
@@ -119,11 +106,13 @@ $(document).ready(function(){
                 success_function.call(this, data, city_name, min_temp, max_temp);
             }
         );
+
     }
 
     function dataReceived(data, city_name) {
         var offset = (new Date()).getTimezoneOffset()*60*1000; 
         var country = data.city.country;
+        $('#weather_table tr').remove();
 
         $.each(data.list, function(){
             var localTime = new Date(this.dt*1000 - offset); 
@@ -134,8 +123,6 @@ $(document).ready(function(){
                 Math.round(this.temp.day) + '&deg;C'
             );
         });
-
-        
 
         $('#location').html(city_name + ', <b>' + country + '</b>'); // Додаємо локацію на сторінку
     }
@@ -194,34 +181,64 @@ $(document).ready(function(){
                 return 'wi-fog';
             }
         }
-
         weather_table.insertRow(-1).innerHTML = markup; // Додаємо рядок до таблиці
-        
-
     }
-
     function showError(msg){
         $('#error').html('Сталася помилка: ' + msg);
     }
 
-
-
-
-    // animations
+   // animations
 
     setTimeout(function() {
         $('#search_form').removeClass('hidden_with_opacity').addClass('pulse');
     }, 200);
-    
-
-
+    function animate_search_form() {
+        setTimeout(function() {
+            $('#search_form').addClass('fadeOutUp');
+        }, 1000);
+        setTimeout(function() {
+            $('#table_wrapper').removeClass('hidden_down').addClass('fadeInUp');
+        }, 1500);
+        setTimeout(function() {
+            $('#search_button').removeClass('loading').removeClass('round');
+        }, 2000);
+    }
     function show_city_animations() {
-        $('#search_button').removeClass('slide_out_up').addClass('fadeOutUpBig');
+        $('#search_button').addClass('fadeOutUpBig');
         $('.results_table').addClass('fadeOutUpBig');
         $('.btn_table').addClass('fadeOutUpBig');
-        $('#table_wrapper').removeClass('slide_out_up').addClass('fadeOutUpBig');
+        $('#table_wrapper').addClass('fadeOutUpBig');
         $('#wrapper_weather_table').removeClass('hidden_down').addClass('fadeInUp');
     }
 
+    $('#back_to_new_search').click(function(event) {
+        $('#table_wrapper').addClass('fadeOutDown');
+        setTimeout(function() {
+            $('#search_form').removeClass('fadeOutUp').addClass('fadeInDown');
+        }, 1000);
+    });
+
+    $('#to_search').click(function(event) {
+        $('#wrapper_weather_table').addClass('fadeOutDown');
+        setTimeout(function() {
+            $('#search_form').removeClass('fadeOutUp').addClass('fadeInDown');
+            $('#search_button').removeClass('fadeOutUpBig');
+        }, 1000);
+    });
+    $('.city_name').click(function(event) {
+        $('#wrapper_weather_table').removeClass('fadeOutDown');
+    });
+    $('#to_cities').click(function(event) {
+        $('#wrapper_weather_table').addClass('fadeOutDown');
+        setTimeout(function() {
+            $('#table_wrapper').removeClass('fadeOutDown').removeClass('fadeOutUpBig').removeClass('fadeInUp').addClass('fadeInDownBig');
+        }, 500);
+    });
+    $('#search_button').click(function(event) {
+        setTimeout(function() {
+            $('#table_wrapper').removeClass('fadeOutDown').removeClass('fadeOutUpBig');
+        }, 2000);
+    });
+    
     
 });
