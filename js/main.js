@@ -78,7 +78,6 @@ $(document).ready(function(){
             
         });
     }
-   
      
     $(document.body).on('click', '.city_name', function(event){
         event.preventDefault();
@@ -86,7 +85,6 @@ $(document).ready(function(){
         getWeatherByCity5Days('eng', dataReceived, showError, $(this).text());
         $('#wrapper_weather_table').removeClass('fadeOutDown');
     });
-
 
     // API interactions
     function getWeatherByCity5Days(lang, success_function, error_function, city_name) {
@@ -108,7 +106,6 @@ $(document).ready(function(){
         );
 
     }
-
     function dataReceived(data, city_name) {
         var offset = (new Date()).getTimezoneOffset()*60*1000; 
         var country = data.city.country;
@@ -123,10 +120,9 @@ $(document).ready(function(){
                 Math.round(this.temp.day) + '&deg;C'
             );
         });
-
         $('#location').html(city_name + ', <b>' + country + '</b>'); // Додаємо локацію на сторінку
+        $('#destination_point').html(city_name);
     }
-
     function addWeather(icon, day, condition, temp){
 
         var icon_class = add_icons(condition);
@@ -137,8 +133,7 @@ $(document).ready(function(){
                 '<td>' + temp + '</td>' +
                 '<td>' + condition + '</td>'
             + '</tr>';
-            
-        
+
         function add_icons(condition) {
             if(condition == 'clear sky') {
                 return 'wi-day-sunny';
@@ -239,6 +234,12 @@ $(document).ready(function(){
             $('#table_wrapper').removeClass('fadeOutDown').removeClass('fadeOutUpBig');
         }, 2000);
     });
-    
-    
+    function find_geolocation_by_ip() 
+    {
+        var district = geoplugin_city();
+        return district;
+    }
+    find_geolocation_by_ip();
+    $('#current_location').html(geoplugin_city() + ' -');
+ 
 });
