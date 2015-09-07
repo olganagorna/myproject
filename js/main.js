@@ -2,10 +2,10 @@ $(document).ready(function(){
 
     // global settings etc.
     var europe = ['Paris', 'Munich', 'Roma', 'Milan', 'Barcelona', 'Vienna', 'Lviv', 'Graz', 'Monaco', 'Lisboa', 'Oslo', 'Prague', 'Warsaw', 'Athens', 'Berlin'];
-    var asia = ['Tokyo', 'Bejing', 'Seul'];
-    var africa = ['Casablanca', 'Tunis', 'Cape Town'];
-    var south_america = ['Rio de Janeiro', 'Buenos Aires', 'La Fortuna'];
-    var north_america = ['Las Vegas', 'New York', 'Orlando'];
+    var asia = ['Tokyo', 'Bejing', 'Seul', 'Istanbul', 'Manado', 'Denpasar', 'Tel Aviv', 'Amman', 'Felidhoo', 'Colombo', 'Bangkok', 'Pattaya', 'Antalya', 'Ankara', 'Izmir', 'Dubai', 'Abu Dhabi'];
+    var africa = ['Casablanca', 'Tunis', 'Cape Town', 'Lagos', 'Cairo', 'Greater Johannesburg', 'Durban', 'Dakar', 'Rabat', 'Tunis'];
+    var south_america = ['Rio de Janeiro', 'Buenos Aires', 'La Fortuna', 'Sao Paulo', 'Lima', 'Bogota', 'Salvador', 'Montevideo', 'Callao', 'Valencia'];
+    var north_america = ['Las Vegas', 'New York', 'Orlando', 'Miami', 'Palm Springs', 'Niagara Falls', 'Virginia Beach', 'Ocean City', 'Mont-Tremblant', 'Lake Louise', 'Varadero', 'Cancún'];
 
     // click handlers
     $('#search_button').click(function(event) {
@@ -83,7 +83,7 @@ $(document).ready(function(){
         event.preventDefault();
         show_city_animations();
         getWeatherByCity5Days('eng', dataReceived, showError, $(this).text());
-        $('#wrapper_weather_table').removeClass('fadeOutDown');
+        $('#wrapper_weather_table').removeClass('fadeOutDownBig');
     });
 
     // API interactions
@@ -207,31 +207,32 @@ $(document).ready(function(){
     }
 
     $('#back_to_new_search').click(function(event) {
-        $('#table_wrapper').addClass('fadeOutDown');
+        $('#table_wrapper').addClass('fadeOutDownBig');
         setTimeout(function() {
             $('#search_form').removeClass('fadeOutUp').addClass('fadeInDown');
+            $('#search_button').removeClass('fadeOutUpBig');
         }, 1000);
     });
 
     $('#to_search').click(function(event) {
-        $('#wrapper_weather_table').addClass('fadeOutDown');
+        $('#wrapper_weather_table').addClass('fadeOutDownBig');
         setTimeout(function() {
             $('#search_form').removeClass('fadeOutUp').addClass('fadeInDown');
             $('#search_button').removeClass('fadeOutUpBig');
         }, 1000);
     });
     $('.city_name').click(function(event) {
-        $('#wrapper_weather_table').removeClass('fadeOutDown');
+        $('#wrapper_weather_table').removeClass('fadeOutDownBig');
     });
     $('#to_cities').click(function(event) {
-        $('#wrapper_weather_table').addClass('fadeOutDown');
+        $('#wrapper_weather_table').addClass('fadeOutDownBig');
         setTimeout(function() {
-            $('#table_wrapper').removeClass('fadeOutDown').removeClass('fadeOutUpBig').removeClass('fadeInUp').addClass('fadeInDownBig');
+            $('#table_wrapper').removeClass('fadeOutDownBig').removeClass('fadeOutUpBig').removeClass('fadeInUp').addClass('fadeInDownBig');
         }, 500);
     });
     $('#search_button').click(function(event) {
         setTimeout(function() {
-            $('#table_wrapper').removeClass('fadeOutDown').removeClass('fadeOutUpBig');
+            $('#table_wrapper').removeClass('fadeOutDownBig').removeClass('fadeOutUpBig');
         }, 2000);
     });
     function find_geolocation_by_ip() 
