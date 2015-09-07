@@ -3,7 +3,7 @@ $(document).ready(function(){
     // global settings etc.
     var europe = ['Paris', 'Munich', 'Roma', 'Milan', 'Barcelona', 'Vienna', 'Lviv', 'Graz', 'Monaco', 'Lisboa', 'Oslo', 'Prague', 'Warsaw', 'Athens', 'Berlin'];
     var asia = ['Tokyo', 'Bejing', 'Seul', 'Istanbul', 'Manado', 'Denpasar', 'Tel Aviv', 'Amman', 'Felidhoo', 'Colombo', 'Bangkok', 'Pattaya', 'Antalya', 'Ankara', 'Izmir', 'Dubai', 'Abu Dhabi'];
-    var africa = ['Casablanca', 'Tunis', 'Cape Town', 'Lagos', 'Cairo', 'Greater Johannesburg', 'Durban', 'Dakar', 'Rabat', 'Tunis'];
+    var africa = ['Casablanca', 'Tunis', 'Cape Town', 'Lagos', 'Cairo', 'Johannesburg', 'Durban', 'Dakar', 'Rabat', 'Tunis'];
     var south_america = ['Rio de Janeiro', 'Buenos Aires', 'La Fortuna', 'Sao Paulo', 'Lima', 'Bogota', 'Salvador', 'Montevideo', 'Callao', 'Valencia'];
     var north_america = ['Las Vegas', 'New York', 'Orlando', 'Miami', 'Palm Springs', 'Niagara Falls', 'Virginia Beach', 'Ocean City', 'Mont-Tremblant', 'Lake Louise', 'Varadero', 'Cancún'];
 
@@ -216,6 +216,7 @@ $(document).ready(function(){
 
     $('#to_search').click(function(event) {
         $('#wrapper_weather_table').addClass('fadeOutDownBig');
+        $('#table_wrapper').css('visibility', 'hidden');
         setTimeout(function() {
             $('#search_form').removeClass('fadeOutUp').addClass('fadeInDown');
             $('#search_button').removeClass('fadeOutUpBig');
@@ -232,6 +233,7 @@ $(document).ready(function(){
     });
     $('#search_button').click(function(event) {
         setTimeout(function() {
+            $('#table_wrapper').css('visibility', 'visible');
             $('#table_wrapper').removeClass('fadeOutDownBig').removeClass('fadeOutUpBig');
         }, 2000);
     });
