@@ -89,8 +89,8 @@ $(document).ready(function(){
     // API interactions
     function getWeatherByCity5Days(lang, success_function, error_function, city_name) {
         $.getJSON(
-            'http://api.openweathermap.org/data/2.5/forecast/daily?q=' + '&APPID=d4c64cf806421f789246705dd391d121' 
-            + city_name + '&cnt=5&units=metric' + '&lang=' + lang,
+            'http://api.openweathermap.org/data/2.5/forecast/daily?q=' 
+            + city_name + '&cnt=5&units=metric' + '&lang=' + lang + '&APPID=d4c64cf806421f789246705dd391d121',
             function (data) {
                 success_function.call(this, data, city_name);
             }
@@ -98,8 +98,8 @@ $(document).ready(function(){
     }
     function getWeatherByCity1Day(lang, success_function, error_function, city_name, min_temp, max_temp) {
         $.getJSON(
-            'http://api.openweathermap.org/data/2.5/forecast/daily?q='  + '&APPID=d4c64cf806421f789246705dd391d121'
-            + city_name + '&cnt=1&units=metric' + '&lang=' + lang,
+            'http://api.openweathermap.org/data/2.5/forecast/daily?q='
+            + city_name + '&cnt=1&units=metric' + '&lang=' + lang + '&APPID=d4c64cf806421f789246705dd391d121',
             function (data) {
                 success_function.call(this, data, city_name, min_temp, max_temp);
             }
