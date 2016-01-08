@@ -11,7 +11,7 @@
 //         } else {
 //             $.getJSON(
 //                 'http://api.openweathermap.org/data/2.5/forecast/daily?lat=' + position.coords.latitude + '&lon=' +
-//                 position.coords.longitude + '&cnt=16&units=metric' + '&lang=' + lang + '&callback=?',
+//                 position.coords.longitude + '&cnt=16&units=metric' + '&lang=' + lang + '&callback=?' + '&APPID=d4c64cf806421f789246705dd391d121',
 //                 function (response) {
 //                     // Store the cache
 //                     localStorage.weatherCache = JSON.stringify({
